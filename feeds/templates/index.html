@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Feeds List</title>
+</head>
+<body>
+    {% if feed_list %}
+        <ul>
+        {% for feed in feed_list %}
+            <li>{{ feed.title}} {{ feed.link}} {{ feed.guid}} {{ feed.pubDate}}</li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No feeds are available.</p>
+    {% endif %}
+</body>
+</html>
