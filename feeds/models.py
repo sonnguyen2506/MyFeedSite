@@ -12,6 +12,7 @@ class Feed(models.Model):
     Category = models.ForeignKey(Category, null=True, on_delete=models.SET_NULL) #models.CASCADE
     title = models.CharField(max_length=200)
     description = models.TextField(blank=True, null=True)
+    #category = models.CharField(max_length=512)
     link = models.CharField(max_length=250)
     guid = models.IntegerField(default=0)
     pubDate = models.CharField(max_length=100)

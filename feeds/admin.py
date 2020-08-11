@@ -7,7 +7,9 @@ from django.contrib import admin
 from .models import Feed, Category
 
 class FeedAdmin(admin.ModelAdmin):
-    list_display = ('title', 'link', 'guid', 'pubDate')
+    list_display = ['title', 'link', 'guid', 'pubDate']
+    list_filter = ['Category_id']
+    search_fields = ['title']
 
 
 #admin.site.register(Category)

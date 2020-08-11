@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-path('feeds/', include('feeds.urls')),
+    path('feeds/', include('feeds.urls')),
+    #path("", include("feeds.urls"), name="feed-urls"),
     path('admin/', admin.site.urls),
 ]

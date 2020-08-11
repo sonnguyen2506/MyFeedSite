@@ -36,10 +36,11 @@ class Command(BaseCommand):
 
             for url in options['urls']:
                 feeds_urls.append(url)
+                logger.warning(url)
                 #print(url)
 
             feedRows = []
-            for url in feeds_urls.items(): #options['urls']
+            for url in feeds_urls: #options['urls']
                 print(url)
                 feeds = feedparser.parse('https://www.feedforall.com/sample.xml')  # 'https://www.feedforall.com/sample.xml'
                 for feed in feeds.entries:
@@ -52,17 +53,18 @@ class Command(BaseCommand):
             # print(*feedRows, sep="\n")
 
             df = pd.DataFrame(feedRows, columns=['title','link','guid','pubDate']) #,'guid','pubDate'
+            logger.warning('Grap feeds to df !')
             print("Grap feeds to df !")
-            logger.info('Grap feeds to df !')
 
             # Save Feeds to SQLite
             df.to_sql(name='feeds_feed', con=conn, if_exists='append', index=False)
             conn.commit()
+            logger.warning('Finished save feeds to db !')
             print("Finished save feeds to db !")
-            logger.info('Finished save feeds to db !')
 
             # Closing the connection
             conn.close()
 
         except Exception as e:
             logger.error("Exception occurred", exc_info=True)
+            print(e.__str__())

@@ -7,20 +7,27 @@ from django.http import HttpResponse
 from django.template import loader
 from .models import Feed
 
-class IndexView(generic.ListView):
-    template_name = 'index.html'
-    context_object_name = 'feed_list'
+class FeedList(generic.ListView):
+    queryset = Feed.objects.all()
+    template_name = 'feed_list.html'
+    #context_object_name = 'feed_list'
+    paginate_by = 3
 
     # def get_queryset(self):
     #     """Return the last five published questions."""
     #     return Feed.objects.get('-pub_date')[:20]
 
-class DetailView(generic.DetailView):
+class FeedDetail(generic.DetailView):
+    model = Feed
+    template_name = 'post_detail.html'
+
+class FeedDetail(generic.DetailView):
     model = Feed
     template_name = 'detail.html'
 
 def index(request):
-    feed_list = Feed.objects.all().filter()
+    feed_list = Feed.objects.all() #.filter(Category_id = '1')
+    paginate_by = 5
     context = {
         'feed_list': feed_list
     }
